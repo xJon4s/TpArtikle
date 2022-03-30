@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/api/artikel": {
+      "post": {
+        "tags": ["artikel"],
+        "summary": "Add new article to the list",
+        "description": "",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Article object thats to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artikel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Article added",
+            "schema": {
+              "$ref": "#/definitions/Artikel"
+            }
+          },
+          "400": {
+            "description": "Input invalid"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["artikel"],
+        "summary": "Deletes all articles",
+        "description": "",
+        "responses": {
+          "204": {
+            "description": "Article deleted succesfully"
+          },
+          "404": {
+            "description": "No article available"
+          }
+        }
+      },
+      "get": {
+        "tags": ["artikel"],
+        "summary": "Returns all articles",
+        "description": "",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Article received succesfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Artikel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/artikel/{code}": {
+      "put": {
+        "tags": ["artikel"],
+        "summary": "Changes an already existing article",
+        "description": "",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code",
+            "description": "Code of the article that is to be changed",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Article that is to be changed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artikel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article changed succesfully",
+            "schema": {
+              "$ref": "#/definitions/Artikel"
+            }
+          },
+          "400": {
+            "description": "Input invalid"
+          },
+          "404": {
+            "description": "Article not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["artikel"],
+        "summary": "Deletes an article",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code",
+            "description": "Code of the article that is to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Article deleted succesfully"
+          },
+          "404": {
+            "description": "Article not found"
+          }
+        }
+      },
+      "get": {
+        "tags": ["artikel"],
+        "summary": "Returns a specific article",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code",
+            "description": "Code of the article that is to be returned",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article returned succesfully",
+            "schema": {
+              "$ref": "#/definitions/Artikel"
+            }
+          },
+          "404": {
+            "description": "Article not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artikel": {
+      "type": "object",
+      "required": ["code", "anzahl", "beschreibung", "einkaufspreis", "bilder", "verkaufspreis"],
+      "properties": {
+        "anzahl": {
+          "type": "integer"
+        },
+        "beschreibung": {
+          "type": "string"
+        },
+        "bilder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Bild"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "einfuehrungsdatum": {
+          "type": "string"
+        },
+        "einkaufspreis": {
+          "type": "number"
+        },
+        "verkaufspreis": {
+          "type": "number"
+        }
+      }
+    },
+    "Bild": {
+      "type": "object",
+      "required": ["url"],
+      "properties": {
+        "titel": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

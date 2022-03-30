@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/0fe49820-387b-402d-8321-80039f11ed68/resourceGroups/appsvc_rg_Linux_northeurope/providers/Microsoft.Web/sites/artikelbilder-mdw",
+    "appService.deploySubpath": ""
+}
